@@ -1,0 +1,8 @@
+# Global gitignore (both Windows and WSL read ~/.config/git/ignore)
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vs/
+*.user
+.env.local

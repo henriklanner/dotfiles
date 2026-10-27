@@ -1,0 +1,15 @@
+{{- /* Generated once per machine on `chezmoi init`. Answers are stored in ~/.config/chezmoi/chezmoi.toml */ -}}
+{{- $name := promptStringOnce . "name" "Git user.name" -}}
+{{- $email := promptStringOnce . "email" "Git user.email" -}}
+{{- $isWsl := false -}}
+{{- if eq .chezmoi.os "linux" -}}
+{{-   $isWsl = (.chezmoi.kernel.osrelease | lower | contains "microsoft") -}}
+{{- end -}}
+
+[data]
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}
+    isWsl = {{ $isWsl }}
+
+[diff]
+    pager = "delta"

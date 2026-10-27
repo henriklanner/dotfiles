@@ -1,0 +1,13 @@
+README.md
+
+{{- if eq .chezmoi.os "windows" }}
+# Linux-only files
+.zshrc
+.config/mise
+.chezmoiscripts/linux/**
+{{- else }}
+# Windows-only files
+.wslconfig
+Documents
+.chezmoiscripts/windows/**
+{{- end }}

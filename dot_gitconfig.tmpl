@@ -1,0 +1,47 @@
+[user]
+    name = {{ .name }}
+    email = {{ .email }}
+
+[init]
+    defaultBranch = main
+
+[core]
+{{- if eq .chezmoi.os "windows" }}
+    autocrlf = true
+{{- else }}
+    autocrlf = input
+{{- end }}
+    pager = delta
+
+[credential]
+{{- if .isWsl }}
+    # Reuse Git Credential Manager from Git for Windows, so you sign in once for both sides
+    helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+{{- else if eq .chezmoi.os "windows" }}
+    helper = manager
+{{- end }}
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    line-numbers = true
+
+[merge]
+    conflictStyle = zdiff3
+
+[diff]
+    colorMoved = default
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
+
+[rerere]
+    enabled = true

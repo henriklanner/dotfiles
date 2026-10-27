@@ -1,0 +1,6 @@
+# Global tool versions (WSL). Projects override these with their own mise.toml.
+[tools]
+node = "lts"
+
+[settings]
+experimental = false

@@ -1,0 +1,11 @@
+# %USERPROFILE%\.wslconfig — applies to all WSL2 distros. Run `wsl --shutdown` after changing.
+[wsl2]
+memory=16GB
+processors=12
+networkingMode=mirrored
+dnsTunneling=true
+autoProxy=true
+
+[experimental]
+autoMemoryReclaim=gradual
+sparseVhd=true

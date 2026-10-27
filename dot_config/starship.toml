@@ -1,0 +1,16 @@
+# Shared prompt for pwsh (Windows) and zsh (WSL). https://starship.rs/config/
+add_newline = true
+command_timeout = 1000
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+
+[git_status]
+disabled = false
+
+[dotnet]
+detect_files = ["global.json", "Directory.Build.props", "*.sln", "*.slnx"]
+
+[nodejs]
+detect_files = ["package.json", ".nvmrc"]
