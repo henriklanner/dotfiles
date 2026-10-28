@@ -10,8 +10,13 @@ if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (zoxide init powershell | Out-String) })
 }
 
-Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
+# Inline (grey ghost text, → to accept). ListView leaves "[History]" rows behind in the
+# scrollback when combined with Starship's transient prompt. F2 still toggles to ListView.
+Set-PSReadLineOption -PredictionSource History -PredictionViewStyle InlineView
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+# Up/Down search history for what's already typed
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 Set-Alias lg lazygit
 
