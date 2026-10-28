@@ -13,3 +13,11 @@
 
 [diff]
     pager = "delta"
+{{- if eq .chezmoi.os "windows" }}
+
+# Windows PowerShell's default execution policy (Restricted) blocks chezmoi's .ps1 scripts.
+# Bypass applies to that one process only; the machine's policy is left unchanged.
+[interpreters.ps1]
+    command = "powershell"
+    args = ["-NoLogo", "-NoProfile", "-ExecutionPolicy", "Bypass"]
+{{- end }}
