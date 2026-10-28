@@ -1,0 +1,38 @@
+{{- /* chezmoi:modify-template */ -}}
+{{- /*
+    Merges the settings in .chezmoitemplates/windows-terminal.json into Windows Terminal's
+    settings.json. Everything else (generated profiles, other schemes, UI changes) is kept,
+    because Terminal itself also writes to this file.
+*/ -}}
+{{- $wt := include ".chezmoitemplates/windows-terminal.json" | fromJson -}}
+{{- $s := dict -}}
+{{- if .chezmoi.stdin }}{{ $s = fromJsonc .chezmoi.stdin }}{{ end -}}
+
+{{- range $k, $v := $wt.global }}{{ $_ := set $s $k $v }}{{ end -}}
+
+{{- /* Replace our scheme and theme by name, keep any others */ -}}
+{{- $schemes := list $wt.scheme -}}
+{{- range (get $s "schemes" | default (list)) }}{{ if ne .name $wt.scheme.name }}{{ $schemes = append $schemes . }}{{ end }}{{ end -}}
+{{- $_ := set $s "schemes" $schemes -}}
+{{- $themes := list $wt.theme -}}
+{{- range (get $s "themes" | default (list)) }}{{ if ne .name $wt.theme.name }}{{ $themes = append $themes . }}{{ end }}{{ end -}}
+{{- $_ := set $s "themes" $themes -}}
+
+{{- $profiles := get $s "profiles" | default (dict) -}}
+{{- $defaults := get $profiles "defaults" | default (dict) -}}
+{{- range $k, $v := $wt.profileDefaults }}{{ $_ := set $defaults $k $v }}{{ end -}}
+{{- $_ := set $profiles "defaults" $defaults -}}
+
+{{- /* Ubuntu's own profile sets its own color scheme, so override it there, and make the
+       first visible Ubuntu profile the default once WSL is installed */ -}}
+{{- $ubuntu := "" -}}
+{{- range (get $profiles "list" | default (list)) -}}
+{{-   if hasPrefix "Ubuntu" (get . "name" | toString) -}}
+{{-     $_ := set . "colorScheme" $wt.profileDefaults.colorScheme -}}
+{{-     if and (not $ubuntu) (not (get . "hidden")) }}{{ $ubuntu = get . "guid" }}{{ end -}}
+{{-   end -}}
+{{- end -}}
+{{- if $ubuntu }}{{ $_ := set $s "defaultProfile" $ubuntu }}{{ end -}}
+{{- $_ := set $s "profiles" $profiles -}}
+
+{{- toPrettyJson "    " $s }}

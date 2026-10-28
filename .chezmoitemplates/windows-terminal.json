@@ -1,0 +1,68 @@
+{
+    "global": {
+        "theme": "Catppuccin Mocha",
+        "launchMode": "focus",
+        "showTabsInTitlebar": true,
+        "showTerminalTitleInTitlebar": false,
+        "tabSwitcherMode": "mru",
+        "copyFormatting": "none",
+        "copyOnSelect": false,
+        "keybindings": [
+            { "id": "Terminal.CopyToClipboard", "keys": "ctrl+c" },
+            { "id": "Terminal.PasteFromClipboard", "keys": "ctrl+v" },
+            { "id": "Terminal.FindText", "keys": "ctrl+shift+f" },
+            { "id": "Terminal.ToggleFocusMode", "keys": "ctrl+f" },
+            { "id": "Terminal.DuplicatePaneAuto", "keys": "alt+shift+d" }
+        ]
+    },
+    "profileDefaults": {
+        "colorScheme": "Catppuccin Mocha",
+        "font": { "face": "JetBrainsMono Nerd Font", "size": 12, "cellHeight": "1.3" },
+        "cursorShape": "filledBox",
+        "intenseTextStyle": "bright",
+        "padding": "10",
+        "scrollbarState": "hidden",
+        "opacity": 90,
+        "useAcrylic": false,
+        "elevate": false
+    },
+    "scheme": {
+        "name": "Catppuccin Mocha",
+        "cursorColor": "#F5E0DC",
+        "selectionBackground": "#585B70",
+        "background": "#1E1E2E",
+        "foreground": "#CDD6F4",
+        "black": "#45475A",
+        "red": "#F38BA8",
+        "green": "#A6E3A1",
+        "yellow": "#F9E2AF",
+        "blue": "#89B4FA",
+        "purple": "#F5C2E7",
+        "cyan": "#94E2D5",
+        "white": "#BAC2DE",
+        "brightBlack": "#585B70",
+        "brightRed": "#F38BA8",
+        "brightGreen": "#A6E3A1",
+        "brightYellow": "#F9E2AF",
+        "brightBlue": "#89B4FA",
+        "brightPurple": "#F5C2E7",
+        "brightCyan": "#94E2D5",
+        "brightWhite": "#A6ADC8"
+    },
+    "theme": {
+        "name": "Catppuccin Mocha",
+        "tab": {
+            "background": "#1E1E2EFF",
+            "showCloseButton": "always",
+            "unfocusedBackground": null
+        },
+        "tabRow": {
+            "background": "#181825FF",
+            "unfocusedBackground": "#11111BFF"
+        },
+        "window": {
+            "applicationTheme": "dark",
+            "useMica": true
+        }
+    }
+}

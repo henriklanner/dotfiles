@@ -9,5 +9,6 @@ README.md
 # Windows-only files
 .wslconfig
 Documents
+AppData
 .chezmoiscripts/windows/**
 {{- end }}
