@@ -5,7 +5,8 @@ set -euo pipefail
 sudo apt-get update
 sudo apt-get install -y \
     zsh git curl wget unzip build-essential ca-certificates \
-    ripgrep fd-find fzf bat jq tmux zoxide eza git-delta
+    ripgrep fd-find fzf bat jq tmux zoxide eza git-delta \
+    libicu-dev  # ICU for .NET; -dev keeps the package name stable across Ubuntu releases
 
 # Ubuntu ships fd and bat under different names
 mkdir -p "$HOME/.local/bin"
@@ -56,6 +57,11 @@ if ! command -v lazydocker >/dev/null; then
     curl -fsSL "https://github.com/jesseduffield/lazydocker/releases/download/v${v}/lazydocker_${v}_Linux_x86_64.tar.gz" \
         | tar -xz -C "$HOME/.local/bin" lazydocker
 fi
+
+# .NET SDK via dotnetup (user-level, no sudo). PATH and DOTNET_ROOT are set in .zshrc,
+# so dotnetup's own profile editing (`dotnetup env set shell`) is deliberately not used.
+[ -x "$HOME/.dotnetup/dotnetup" ] || curl -fsSL https://aka.ms/dotnetup/get-dotnetup.sh | bash
+"$HOME/.dotnetup/dotnetup" install lts --interactive false --no-progress
 
 # zsh as login shell
 if [ "$(basename "$SHELL")" != "zsh" ]; then
