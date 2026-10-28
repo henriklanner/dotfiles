@@ -51,6 +51,11 @@ if ! command -v lazygit >/dev/null; then
     curl -fsSL "https://github.com/jesseduffield/lazygit/releases/download/v${v}/lazygit_${v}_Linux_x86_64.tar.gz" \
         | tar -xz -C "$HOME/.local/bin" lazygit
 fi
+if ! command -v lazydocker >/dev/null; then
+    v=$(curl -fsSL https://api.github.com/repos/jesseduffield/lazydocker/releases/latest | jq -r .tag_name | sed 's/^v//')
+    curl -fsSL "https://github.com/jesseduffield/lazydocker/releases/download/v${v}/lazydocker_${v}_Linux_x86_64.tar.gz" \
+        | tar -xz -C "$HOME/.local/bin" lazydocker
+fi
 
 # zsh as login shell
 if [ "$(basename "$SHELL")" != "zsh" ]; then

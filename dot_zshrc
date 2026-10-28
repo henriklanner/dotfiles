@@ -23,6 +23,7 @@ command -v starship >/dev/null && eval "$(starship init zsh)"
 # Aliases
 command -v eza >/dev/null && alias ls='eza --group-directories-first' && alias ll='eza -la --git --group-directories-first'
 alias lg='lazygit'
+alias lzd='lazydocker'
 alias dn='dotnet'
 
 # Machine-specific overrides that don't belong in the repo
