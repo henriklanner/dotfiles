@@ -1,0 +1,10 @@
+{{- if eq .chezmoi.os "windows" }}
+# JetBrainsMono Nerd Font from the official Nerd Fonts release, installed for this user only
+# (no admin). Registered by .chezmoiscripts/windows/run_onchange_after_20-register-fonts.ps1.tmpl.
+# To upgrade: change the version and the sha256 (GitHub shows it on the release asset).
+["AppData/Local/Microsoft/Windows/Fonts/JetBrainsMonoNerdFont"]
+    type = "archive"
+    url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/JetBrainsMono.tar.xz"
+    checksum.sha256 = "04d5e8f903693f9dd13e16f867e994834e681eb3c72c0d337a770dcda09010cf"
+    include = ["JetBrainsMonoNerdFont-*.ttf"]
+{{- end }}
