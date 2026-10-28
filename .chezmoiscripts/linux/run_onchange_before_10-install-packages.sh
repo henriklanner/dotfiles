@@ -22,6 +22,27 @@ if ! command -v gh >/dev/null; then
     sudo apt-get update && sudo apt-get install -y gh
 fi
 
+# Docker Engine (official apt repo) instead of Docker Desktop on Windows
+if ! command -v docker >/dev/null; then
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" \
+        | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+    sudo apt-get update
+    sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+fi
+getent group docker | grep -qw "$USER" || sudo usermod -aG docker "$USER"
+
+# Docker's service needs systemd; recent WSL Ubuntu images enable it, older ones don't
+if ! grep -qs '^systemd=true' /etc/wsl.conf; then
+    printf '\n[boot]\nsystemd=true\n' | sudo tee -a /etc/wsl.conf >/dev/null
+    echo ">>> Enabled systemd in /etc/wsl.conf. Run 'wsl --shutdown' from Windows, then reopen Ubuntu."
+fi
+if [ "$(ps -p 1 -o comm=)" = "systemd" ]; then
+    sudo systemctl enable --now docker
+fi
+
 # Tools not in apt (or too old there) go to ~/.local/bin
 command -v starship >/dev/null || curl -sS https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
 command -v mise     >/dev/null || curl -fsSL https://mise.run | sh

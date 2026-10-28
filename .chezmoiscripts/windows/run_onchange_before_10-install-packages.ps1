@@ -13,8 +13,7 @@ $packages = @(
     'junegunn.fzf'
     'JesseDuffield.lazygit'
     'DEVCOM.JetBrainsMonoNerdFont'
-    # 'Docker.DockerDesktop'   # or run Docker Engine inside WSL instead
-    # 'JetBrains.Rider'
+    # Docker runs as Docker Engine inside WSL, see .chezmoiscripts/linux
 )
 
 foreach ($id in $packages) {
