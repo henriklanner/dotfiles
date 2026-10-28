@@ -24,14 +24,12 @@ OS filtering lives in `.chezmoiignore`; per-machine answers (name, email) are pr
 ```powershell
 winget install twpayne.chezmoi
 chezmoi init --apply henriklanner
-wsl --install -d Ubuntu-24.04   # admin, reboot
+wsl --install -d Ubuntu   # latest LTS; admin, reboot
 ```
 
-**WSL (Ubuntu):** the repo is private, so borrow Windows' Git Credential Manager for the first clone
-(the applied `.gitconfig` sets the same helper permanently):
+**WSL (Ubuntu):**
 
 ```bash
-git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
 sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin init --apply henriklanner
 ```
 

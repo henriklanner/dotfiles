@@ -15,8 +15,12 @@
 
 [credential]
 {{- if .isWsl }}
-    # Reuse Git Credential Manager from Git for Windows, so you sign in once for both sides
-    helper = /mnt/c/Program\\ Files/Git/mingw64/bin/git-credential-manager.exe
+{{-   $gcm := glob "/mnt/c/Program Files/Git/*/bin/git-credential-manager.exe" }}
+{{-   if $gcm }}
+    # Reuse Git Credential Manager from Git for Windows, so you sign in once for both sides.
+    # Newer Git for Windows ships it under ucrt64/, older versions under mingw64/.
+    helper = {{ first $gcm | replace " " "\\\\ " }}
+{{-   end }}
 {{- else if eq .chezmoi.os "windows" }}
     helper = manager
 {{- end }}
