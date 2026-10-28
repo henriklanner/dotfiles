@@ -12,6 +12,7 @@ $packages = @(
     'BurntSushi.ripgrep.MSVC'
     'junegunn.fzf'
     'JesseDuffield.lazygit'
+    'eza-community.eza'
     # JetBrainsMono Nerd Font comes from the official release via .chezmoiexternal.toml.tmpl
     # Docker runs as Docker Engine inside WSL, see .chezmoiscripts/linux
 )
