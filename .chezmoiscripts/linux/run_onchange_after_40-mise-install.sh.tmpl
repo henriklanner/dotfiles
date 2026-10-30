@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Installs the tools in ~/.config/mise/config.toml (Node LTS) so they're ready before first use.
+# Re-runs whenever that config changes: {{ include "dot_config/mise/config.toml" | sha256sum }}
+set -euo pipefail
+"$HOME/.local/bin/mise" install --yes

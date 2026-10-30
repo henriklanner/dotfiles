@@ -23,16 +23,12 @@
 {{- range $k, $v := $wt.profileDefaults }}{{ $_ := set $defaults $k $v }}{{ end -}}
 {{- $_ := set $profiles "defaults" $defaults -}}
 
-{{- /* Ubuntu's own profile sets its own color scheme, so override it there, and make the
-       first visible Ubuntu profile the default once WSL is installed */ -}}
-{{- $ubuntu := "" -}}
+{{- /* Ubuntu's own profile sets its own color scheme, so override it there */ -}}
 {{- range (get $profiles "list" | default (list)) -}}
 {{-   if hasPrefix "Ubuntu" (get . "name" | toString) -}}
 {{-     $_ := set . "colorScheme" $wt.profileDefaults.colorScheme -}}
-{{-     if and (not $ubuntu) (not (get . "hidden")) }}{{ $ubuntu = get . "guid" }}{{ end -}}
 {{-   end -}}
 {{- end -}}
-{{- if $ubuntu }}{{ $_ := set $s "defaultProfile" $ubuntu }}{{ end -}}
 {{- $_ := set $s "profiles" $profiles -}}
 
 {{- toPrettyJson "    " $s }}
