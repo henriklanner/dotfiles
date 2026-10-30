@@ -1,4 +1,19 @@
+{{- $batDir := ".config/bat" -}}
+{{- if eq .chezmoi.os "windows" }}{{ $batDir = "AppData/Roaming/bat" }}{{ end -}}
+
+# Catppuccin Mocha themes, pinned to a commit and verified by sha256.
+# bat's theme is also what delta uses for syntax highlighting in git diffs.
+["{{ $batDir }}/themes/Catppuccin Mocha.tmTheme"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/bat/6810349b28055dce54076712fc05fc68da4b8ec0/themes/Catppuccin%20Mocha.tmTheme"
+    checksum.sha256 = "395566f08ceb301b936b91c077690ef94f7aeb651b121553f201c99c2bd4aa77"
+
+[".config/delta/catppuccin.gitconfig"]
+    type = "file"
+    url = "https://raw.githubusercontent.com/catppuccin/delta/011516f5d14f66b771b3e716f29c77231e008c74/catppuccin.gitconfig"
+    checksum.sha256 = "f0580ada6b1e3767b718b25116a2ababec314474a12d1a796c917ef93d63b455"
 {{- if eq .chezmoi.os "windows" }}
+
 # JetBrainsMono Nerd Font from the official Nerd Fonts release, installed for this user only
 # (no admin). Registered by .chezmoiscripts/windows/run_onchange_after_20-register-fonts.ps1.tmpl.
 # To upgrade: change the version and the sha256 (GitHub shows it on the release asset).

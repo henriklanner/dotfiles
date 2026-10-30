@@ -28,7 +28,14 @@
 [interactive]
     diffFilter = delta --color-only
 
+[include]
+    # Catppuccin delta styles, downloaded by .chezmoiexternal.toml.tmpl
+    path = ~/.config/delta/catppuccin.gitconfig
+
 [delta]
+    features = catppuccin-mocha
+    # Windows Terminal doesn't set COLORTERM, so delta would fall back to 256 colors
+    true-color = always
     navigate = true
     line-numbers = true
 

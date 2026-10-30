@@ -1,0 +1,3 @@
+# Rebuilds bat's theme cache so bat and delta see the Catppuccin theme.
+# Re-runs whenever the theme sources change: {{ include ".chezmoiexternal.toml.tmpl" | sha256sum }}
+if (Get-Command bat -ErrorAction SilentlyContinue) { bat cache --build }

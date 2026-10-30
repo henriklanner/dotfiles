@@ -1,0 +1,2 @@
+# bat config, shared by Windows (%APPDATA%\bat) and WSL (~/.config/bat)
+--theme="Catppuccin Mocha"

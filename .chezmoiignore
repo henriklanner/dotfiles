@@ -4,6 +4,8 @@ README.md
 # Linux-only files
 .zshrc
 .config/mise
+.config/bat
+.config/lazygit
 .chezmoiscripts/linux/**
 {{- else }}
 # Windows-only files

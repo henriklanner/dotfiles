@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Rebuilds bat's theme cache so bat and delta see the Catppuccin theme.
+# Re-runs whenever the theme sources change: {{ include ".chezmoiexternal.toml.tmpl" | sha256sum }}
+set -euo pipefail
+bat=$(command -v bat || command -v batcat || true)
+[ -n "$bat" ] && "$bat" cache --build

@@ -9,6 +9,7 @@ $packages = @(
     'Starship.Starship'
     'ajeetdsouza.zoxide'
     'dandavison.delta'
+    'sharkdp.bat'
     'BurntSushi.ripgrep.MSVC'
     'junegunn.fzf'
     'JesseDuffield.lazygit'
