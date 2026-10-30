@@ -1,5 +1,14 @@
 # PowerShell 7 profile (Windows) — managed by chezmoi
 
+# History list under the prompt (F2 toggles inline). Must be set before `starship init`:
+# Starship only enables its fix for list leftovers with the transient prompt if
+# ListView is already active when it initializes.
+Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+# Up/Down search history for what's already typed
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+
 if (Get-Command starship -ErrorAction SilentlyContinue) {
     Invoke-Expression (&starship init powershell)
     # Collapse previous prompts in scrollback to just ❯
@@ -9,14 +18,6 @@ if (Get-Command starship -ErrorAction SilentlyContinue) {
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
     Invoke-Expression (& { (zoxide init powershell | Out-String) })
 }
-
-# Inline (grey ghost text, → to accept). ListView leaves "[History]" rows behind in the
-# scrollback when combined with Starship's transient prompt. F2 still toggles to ListView.
-Set-PSReadLineOption -PredictionSource History -PredictionViewStyle InlineView
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
-# Up/Down search history for what's already typed
-Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 Set-Alias lg lazygit
 

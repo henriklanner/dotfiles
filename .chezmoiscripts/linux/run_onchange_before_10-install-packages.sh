@@ -6,6 +6,7 @@ sudo apt-get update
 sudo apt-get install -y \
     zsh git curl wget unzip build-essential ca-certificates \
     ripgrep fd-find fzf bat jq tmux zoxide eza git-delta \
+    zsh-autosuggestions zsh-syntax-highlighting \
     libicu-dev  # ICU for .NET; -dev keeps the package name stable across Ubuntu releases
 
 # Ubuntu ships fd and bat under different names

@@ -9,6 +9,15 @@ HISTSIZE=50000
 SAVEHIST=50000
 setopt share_history hist_ignore_all_dups hist_reduce_blanks
 
+# Up/Down search history for what's already typed (like pwsh)
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey '^[[A' up-line-or-beginning-search
+bindkey '^[OA' up-line-or-beginning-search
+bindkey '^[[B' down-line-or-beginning-search
+bindkey '^[OB' down-line-or-beginning-search
+
 # Completion
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -23,6 +32,8 @@ export FZF_DEFAULT_OPTS="--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38B
 --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
 --color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
 --color=selected-bg:#45475A --color=border:#6C7086,label:#CDD6F4"
+# Ctrl+R: history list right under the prompt, best match on top (like pwsh's list view)
+export FZF_CTRL_R_OPTS="--layout=reverse"
 [ -f /usr/share/doc/fzf/examples/key-bindings.zsh ] && source /usr/share/doc/fzf/examples/key-bindings.zsh
 [ -f /usr/share/doc/fzf/examples/completion.zsh ]   && source /usr/share/doc/fzf/examples/completion.zsh
 
@@ -36,5 +47,12 @@ alias lg='lazygit'
 alias lzd='lazydocker'
 alias dn='dotnet'
 
+# Grey inline suggestions from history (→ to accept), like pwsh's predictions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#6c7086'
+[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Machine-specific overrides that don't belong in the repo
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# Command highlighting; must be sourced last
+[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
